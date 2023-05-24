@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TodoController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,11 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/todo/{todo}',[TodoController::class, 'destroy'])->name('todo.destroy');
     Route::delete('/todo',[TodoController::class, 'destroyCompleted'])->name('todo.deleteallcompleted');
+
+    Route::get('category', [CategoryController::class, 'index'])->name(('category.index'));
+    Route::get('category/create', [CategoryController::class, 'create'])->name('category.create');
+    Route::post('category', [CategoryController::class, 'store'])->name('category.store');
+    Route::delete('category/{category}', [CategoryController::class, 'destroy'])->name('category.destroy');
 
     Route::middleware('admin')->group(function () {
 

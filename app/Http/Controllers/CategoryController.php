@@ -9,34 +9,36 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::where('user_id', auth()->user()->id)
-            ->orderBy('created_at', 'desc')
+        $category = Category::where('user_id', auth()->user()->id)
+            ->orderBy('title', 'asc')
             ->get();
 
-        return view('category.index', compact('categories'));
+        // $category = Category::with('todo')->where('user_id', auth()->user()->id)
+        //     ->orderBy('title')
+        //     ->paginate(10);
+
+        return view('category.index', compact('category'));
     }
 
     public function store(Request $request, Category $category)
     {
         $request->validate([
-            'name' => 'required|max:255',
+            'title' => 'required|max:255',
         ]);
 
         $category = Category::create([
-            'name'    => ucfirst($request->name),
+            'title'    => ucfirst($request->title),
             'user_id' => auth()->user()->id,
         ]);
 
         return redirect()->route('category.index')->with('success', 'Category created successfully!');
     }
 
-    // return view category.create
     public function create()
     {
         return view('category.create');
     }
 
-    // return view category.edit
     public function edit(Category $category)
     {
         if (auth()->user()->id == $category->user_id) {
@@ -49,11 +51,11 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $request->validate([
-            'name' => 'required|max:255',
+            'title' => 'required|max:255',
         ]);
 
         $category->update([
-            'name' => ucfirst($request->name),
+            'title' => ucfirst($request->title),
         ]);
 
         return redirect()->route('category.index')->with('success', 'Category updated successfully!');

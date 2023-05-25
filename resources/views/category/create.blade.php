@@ -1,68 +1,36 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-text-gray-200 leading-tight">
-            {{ __('Category') }}
+        <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
+            {{ __('Create Todo Category') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-xl text-gray-900 dark:text-gray-100">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <x-create-button href=""/>
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="overflow-hidden bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <form method="post" action="{{ route('category.store') }}" class="">
+                        @csrf
+                        @method('post')
+                        <div class="mb-6">
+                            <x-input-label for="title" :value="__('Title')" />
+                            <x-text-input id="title" name="title" type="text" class="block w-full mt-1"
+                                required autofocus autocomplete="title" />
+                            <x-input-error class="mt-2" :messages="$errors->get('title')" />
                         </div>
-                        <div>
-                            @if (session('success'))
-                            <p x-data='{show: true }' x-show="show" x-transition x-init="setTimeout(() => show = false, 5000)" class="text-sm text-green-600 dark:text-green-400">{{ session('success') }}</p>
-                            @endif
-                            @if (session('danger'))
-                            <p x-data='{show: true }' x-show="show" x-transition x-init="setTimeout(() => show = false, 5000)" class="text-sm text-red-600 dark:text-red-400">{{ session('danger') }}</p>
-                            @endif
+                        <div class="flex items-center gap-4">
+                            <x-primary-button>{{ __('Save') }}</x-primary-button>
+                            <a href="{{ route('category.index') }}"
+                                class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest
+                            text-gray-700 uppercase transition duration-150 ease-in-out
+                            bg-white border border-gray-300 rounded-md shadow-sm dark:bg-gray-800
+                            dark:border-gray-500 dark:text-gray-300 hover:bg-gray-50
+                            dark:hover:bg-gray-700 focus:outline-none focus:ring-2
+                            focus:ring-indigo-500 focus:ring-offset-2
+                            dark:focus:ring-offset-gray-800 disabled:opacity-25">{{ __('Cancel') }}</a>
                         </div>
-                    </div>
-                </div>
-                <div class="relative overflow-x-auto">
-                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                            <tr>
-                                <th scope="col" class="px-6 py-3">
-                                    Title
-                                </th>
-                                <th scope="col" class="hidden px-6 py-3 md:block">
-                                    Todo
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Action
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="odd:bg-white odd:dark:bg-gray-800 even:bg-gray-50 even:dark:bg-gray-700">
-                                <td scope='row' class="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                                    <a href="" class="hover:underline">Title</a>
-                                </td>
-                                <td class="hidden px-6 py-4 md:block">
-                                    <p>Todo</p>
-
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="flex space-x-3">
-                                        <form action="" method="Post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                class="text-red-600 dark:text-red-400">Delete</button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
-
 </x-app-layout>

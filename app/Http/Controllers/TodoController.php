@@ -50,11 +50,9 @@ class TodoController extends Controller
         $categories = Category::get();
         if(auth()->user()->id == $todo->user_id)
         {
-            // dd($todo);
             return view('todo.edit', compact('todo', 'categories'));
         }else{
-            // abort(403);
-            // abort(403, 'Not authorized')
+
             return redirect()->route('todo.index')->with('danger','You are not authorized to edit this todo!');
         }
     }
@@ -66,11 +64,6 @@ class TodoController extends Controller
             'category_id' => 'required|exists:categories,id',
         ]);
 
-        // Practical
-        // $todo->title = $request->title;
-        // $todo->save();
-
-        // Elequent Way - Readble
         $todo->update([
             'title' => ucfirst($request->title),
             'category_id' => $request->category_id,
@@ -119,7 +112,6 @@ class TodoController extends Controller
 
     public function destroyCompleted()
     {
-        // get all todos for current user where is_complete is true
         $todosCompleted = Todo::where('user_id', auth()->user()->id)
             ->where('is_complete', true)
             ->get();

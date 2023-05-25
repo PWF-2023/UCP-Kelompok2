@@ -22,10 +22,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('todos', function (Blueprint $table) {
-            $table->dropForeign(['category_id']);
-            $table->dropColumn('category_id');
-        });
-        Schema::dropIfExists('todos');
+        // Schema::table('todos', function (Blueprint $table) {
+        //     $table->dropForeign(['category_id']);
+        //     $table->dropColumn('category_id');
+        // });
+        // Schema::dropIfExists('todos');
     }
 };

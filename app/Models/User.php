@@ -47,10 +47,10 @@ class User extends Authenticatable
         return $this->hasMany(Todo::class);
     }
 
-    public function category()
-    {
-        return $this->hasMany(Category::class);
-    }
+    // public function category()
+    // {
+    //     return $this->hasMany(Category::class);
+    // }
 
     public function index()
     {

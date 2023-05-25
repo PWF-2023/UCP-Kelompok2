@@ -7,17 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $table = 'category_id';
-    protected $guarded = ['user_id'];
+    // protected $table = 'category_id';
+    // protected $guarded = ['user_id'];
 
     use HasFactory;
 
     protected $fillable = [
-        'title',
         'user_id',
+        'title',
     ];
 
-    public function todos()
+    public function todo()
     {
         return $this->hasMany(Todo::class);
     }

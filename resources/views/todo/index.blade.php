@@ -55,14 +55,12 @@
                                         <a href="{{ route('todo.edit', $todo) }}"
                                             class="hover:underline">{{ $todo->title }}</a>
                                     </td>
-                                    <!-- Add table row field category -->
                                     <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">
                                         @if ($todo->category_id == null)
                                             <span></span>
                                         @else
                                             {{ $todo->category->title }}
                                         @endif
-                                        <!-- Data from relation in model todo so get data title with category->title -->
                                     </td>
                                     <td class="hidden px-6 py-4 md:block">
                                         @if ($todo->is_complete == false)
@@ -133,5 +131,4 @@
                 </div>
             </div>
         </div>
-
 </x-app-layout>

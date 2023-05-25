@@ -38,26 +38,8 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        Category::create(
-            [
-                'user_id' => '1',
-                'title' => 'Category A',
-            ]
-        );
-        Category::create(
-            [
-                'user_id' => '2',
-                'title' => 'Category B',
-            ]
-        );
-        Category::create(
-            [
-                'user_id' => '3',
-                'title' => 'Category C',
-            ]
-        );
-
         User::factory(100)->create();
+        Category::factory(10)->create();
         Todo::factory(500)->create();
     }
 }
